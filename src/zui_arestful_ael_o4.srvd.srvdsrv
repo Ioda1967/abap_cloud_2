@@ -1,0 +1,11 @@
+@EndUserText: {
+  label: 'Service Definition for ZC_ARESTFUL_AEL'
+}
+@ObjectModel: {
+  leadingEntity: {
+    name: 'ZC_ARESTFUL_AEL'
+  }
+}
+define service ZUI_ARESTFUL_AEL_O4 provider contracts odata_v4_ui {
+  expose ZC_ARESTFUL_AEL as Flights;
+}
