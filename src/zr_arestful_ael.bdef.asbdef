@@ -31,6 +31,8 @@ authorization master( global )
   draft action Resume;
   draft determine action Prepare;
 
+  validation checksemanticKey on save { create; update; }
+
   mapping for ZARESTFUL_AEL
   {
     Uuid = uuid;

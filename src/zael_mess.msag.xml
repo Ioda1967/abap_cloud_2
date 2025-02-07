@@ -12,7 +12,7 @@
      <SPRSL>E</SPRSL>
      <ARBGB>ZAEL_MESS</ARBGB>
      <MSGNR>001</MSGNR>
-     <TEXT>Flight number &amp;1 &amp;2 already exist</TEXT>
+     <TEXT>Carrier Id &amp;1 Connection ID &amp;2 already exist</TEXT>
     </T100>
     <T100>
      <SPRSL>E</SPRSL>
