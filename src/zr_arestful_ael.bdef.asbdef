@@ -31,8 +31,6 @@ authorization master( global )
   draft action Resume;
   draft determine action Prepare;
 
-  validation checksemanticKey on save { create; update; }
-
   mapping for ZARESTFUL_AEL
   {
     Uuid = uuid;
@@ -50,4 +48,6 @@ authorization master( global )
     LocalLastChangedAt = local_last_changed_at;
     LastChangedAt = last_changed_at;
   }
+  validation    checksemanticKey on save { create; update; }
+  determination getcities        on save { field AirportFromID, AirportToID; }
 }
