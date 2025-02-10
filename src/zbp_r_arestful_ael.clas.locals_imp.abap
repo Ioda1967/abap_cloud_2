@@ -11,8 +11,8 @@ CLASS lhc_zr_arestful_ael DEFINITION INHERITING FROM cl_abap_behavior_handler.
       checksemanticKey FOR VALIDATE ON SAVE
         IMPORTING keys FOR Flights~checksemanticKey,
 
-      getcities FOR DETERMINE ON SAVE
-        IMPORTING keys FOR Flights~getcities.
+      GetCities FOR DETERMINE ON SAVE
+        IMPORTING keys FOR Flights~GetCities.
 
 ENDCLASS.
 
@@ -81,18 +81,15 @@ CLASS lhc_zr_arestful_ael IMPLEMENTATION.
 
         APPEND failed_record TO failed-flights.
 
-
       ENDIF.
 
     ENDLOOP.
 
-
-
   ENDMETHOD.
 
-  METHOD getcities.
+  METHOD GetCities.
 
-*   Esta es la sentencia de eml para leer los datos que se han grabado
+*   Esta es la sentencia de EML para leer los datos que se han grabado
 *   la definición del destino es inline
     READ ENTITIES OF zr_arestful_ael IN LOCAL MODE
            ENTITY Flights
@@ -100,37 +97,32 @@ CLASS lhc_zr_arestful_ael IMPLEMENTATION.
              WITH CORRESPONDING #(  keys )
            RESULT DATA(Flightss).
 
-* relleno la tabla que he leido con los valores
+*   Relleno la tabla leida con los valores determinados
     LOOP AT flightss INTO DATA(wfl).
-
       SELECT SINGLE
-        FROM /dmo/i_airport
-        FIELDS City, CountryCode
-        WHERE AirportID = @wfl-AirportFromID
-        INTO ( @wfl-CityFrom, @wfl-CountryFrom ).
-
+       FROM /dmo/i_airport
+       FIELDS City, CountryCode
+       WHERE AirportID = @wfl-AirportFromID
+       INTO ( @wfl-CityTo, @wfl-CountryTo ).
       SELECT SINGLE
        FROM /dmo/i_airport
        FIELDS City, CountryCode
        WHERE AirportID = @wfl-AirportToID
        INTO ( @wfl-CityTo, @wfl-CountryTo ).
-
       MODIFY flightss FROM wfl.
-
     ENDLOOP.
 
-*   Defino una tabla para el update
+* Defino una tabla para el update
     DATA : flights_upd TYPE TABLE FOR UPDATE zr_arestful_ael.
+    flights_upd = CORRESPONDING #(  flightss ).
 
-    flights_upd = CORRESPONDING #( flightss ).
-
-*  ejecuto MODIFY ENTITIES
+*  Con modify entities confirmo los cambios
     MODIFY ENTITIES OF zr_arestful_ael IN LOCAL MODE
-               ENTITY Flights
-               UPDATE
-               FIELDS ( CityFrom CountryFrom CityTo CountryTo )
-                 WITH flights_upd
-               REPORTED DATA(reported_records).
+      ENTITY flights
+      UPDATE
+      FIELDS ( CityTo CountryTo CityFrom CountryFrom )
+      WITH flights_upd
+      REPORTED DATA(reported_records).
 
     reported-flights = CORRESPONDING #( reported_records-flights ).
 
