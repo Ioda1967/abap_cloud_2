@@ -12,7 +12,7 @@ ENDCLASS.
 
 
 
-CLASS z_ael67_4_tables_complex IMPLEMENTATION.
+CLASS Z_AEL67_4_TABLES_COMPLEX IMPLEMENTATION.
 
 
   METHOD if_oo_adt_classrun~main.

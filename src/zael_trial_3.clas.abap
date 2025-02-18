@@ -12,7 +12,7 @@ ENDCLASS.
 
 
 
-CLASS zael_trial_3 IMPLEMENTATION.
+CLASS ZAEL_TRIAL_3 IMPLEMENTATION.
 
 
   METHOD if_oo_adt_classrun~main.

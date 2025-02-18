@@ -12,7 +12,7 @@ ENDCLASS.
 
 
 
-CLASS zael67_ex_select IMPLEMENTATION.
+CLASS ZAEL67_EX_SELECT IMPLEMENTATION.
 
 
   METHOD if_oo_adt_classrun~main.
