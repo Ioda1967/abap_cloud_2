@@ -11,9 +11,9 @@ CLASS lcl_plane DEFINITION.
 * declare table - do not allow the same attribute to be used more than once
            tt_attributes TYPE SORTED TABLE OF ts_attributes WITH UNIQUE KEY name.
 
-
     METHODS constructor IMPORTING iv_manufacturer TYPE string
                                   iv_type         TYPE string.
+
     METHODS: get_Attributes RETURNING VALUE(rt_Attributes) TYPE tt_attributes.
 
 
